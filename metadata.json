@@ -1,0 +1,7 @@
+{
+  "name": "ReRoute | Premium Taxi Booking & Car Rental India",
+  "description": "Book reliable outstation cabs, airport taxis, and local car rentals in India with ReRoute. Professional chauffeurs and transparent pricing for every trip.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
