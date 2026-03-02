@@ -8,6 +8,8 @@ export enum TripType {
 
 export type AirportTripSubtype = 'PICKUP' | 'DROP';
 
+export type LocalPackage = '4hrs_40km' | '8hrs_80km' | '12hrs_120km';
+
 export interface BookingDetails {
   from: string;
   to: string;
@@ -17,6 +19,7 @@ export interface BookingDetails {
   tripType: TripType;
   airportTripSubtype?: AirportTripSubtype;
   pickupAddress?: string;
+  localPackage?: LocalPackage;
 }
 
 export interface User {
