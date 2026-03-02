@@ -30,7 +30,7 @@ export const VEHICLES: Vehicle[] = [
     seats: 4,
     pricePerKm: 9,
     basePrice: 1200,
-    image: 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&q=80&w=800',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/c/ca/2022_Tata_Tiago_XZA%2B_front_20230512.jpg',
     features: ['AC', 'GPS', 'Compact'],
     description: 'Perfect for solo travelers or small families on a budget.'
   },
@@ -41,7 +41,7 @@ export const VEHICLES: Vehicle[] = [
     seats: 4,
     pricePerKm: 10,
     basePrice: 1400,
-    image: 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&q=80&w=800',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/d/d6/Suzuki_SWIFT_XR_Limited_(DBA-ZC83S-VBGE-SJM)_front.jpg',
     features: ['AC', 'Music System', 'City Expert'],
     description: 'The iconic Indian hatchback, reliable and nimble in traffic.'
   },
@@ -52,7 +52,7 @@ export const VEHICLES: Vehicle[] = [
     seats: 4,
     pricePerKm: 11,
     basePrice: 1500,
-    image: 'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&q=80&w=800',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/f/f0/2020_Hyundai_i20_1.2_MPI_(BC3).jpg',
     features: ['Premium Audio', 'Spacious Cabin', 'AC'],
     description: 'A premium hatchback experience with superior comfort.'
   },
@@ -63,7 +63,7 @@ export const VEHICLES: Vehicle[] = [
     seats: 4,
     pricePerKm: 10,
     basePrice: 1450,
-    image: 'https://images.unsplash.com/photo-1621067219504-f7614e57842e?auto=format&fit=crop&q=80&w=800',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/5/5b/2022_Maruti_Suzuki_Baleno_Alpha_(India)_front_view.jpg',
     features: ['Large Boot', 'Fuel Efficient', 'AC'],
     description: 'Spacious and sophisticated, ideal for airport runs.'
   },
@@ -76,7 +76,7 @@ export const VEHICLES: Vehicle[] = [
     seats: 4,
     pricePerKm: 12,
     basePrice: 1800,
-    image: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=800',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/0/0a/Maruti_Suzuki_Dzire_VXi_VVT_(front).JPG',
     features: ['Extra Legroom', 'Boot Space', 'AC'],
     description: 'The preferred choice for intercity one-way drops.'
   },
@@ -87,7 +87,7 @@ export const VEHICLES: Vehicle[] = [
     seats: 4,
     pricePerKm: 12,
     basePrice: 1750,
-    image: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/1/17/2020_Hyundai_Aura_Front.png',
     features: ['Modern Interiors', 'Smooth Ride', 'AC'],
     description: 'A stylish sedan for corporate commutes and city tours.'
   },
@@ -98,7 +98,7 @@ export const VEHICLES: Vehicle[] = [
     seats: 4,
     pricePerKm: 15,
     basePrice: 2200,
-    image: 'https://images.unsplash.com/photo-1620211105995-18e381ec3843?auto=format&fit=crop&q=80&w=800',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/e/e9/Honda_City_(sixth_generation)_front.JPG',
     features: ['Sunroof', 'Leather Seats', 'Quiet Cabin'],
     description: 'Executive class comfort for the discerning traveler.'
   },
@@ -109,7 +109,7 @@ export const VEHICLES: Vehicle[] = [
     seats: 4,
     pricePerKm: 16,
     basePrice: 2500,
-    image: 'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&q=80&w=800',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/9/92/2021_%C5%A0koda_Slavia_1.5_TSI_Style_(India)_front_view.png',
     features: ['European Safety', 'Solid Build', 'Large Boot'],
     description: 'European engineering for a safe and sturdy road trip.'
   },
@@ -122,7 +122,7 @@ export const VEHICLES: Vehicle[] = [
     seats: 6,
     pricePerKm: 16,
     basePrice: 2800,
-    image: 'https://images.unsplash.com/photo-1590362891991-f776e747a588?auto=format&fit=crop&q=80&w=800',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/2/23/2022_Maruti_Suzuki_Ertiga_LXi.jpg',
     features: ['Value for Money', 'Dual AC', 'Hybrid'],
     description: 'The perfect companion for medium-sized family groups.'
   },
@@ -133,7 +133,7 @@ export const VEHICLES: Vehicle[] = [
     seats: 7,
     pricePerKm: 22,
     basePrice: 3500,
-    image: 'https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&q=80&w=800',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/7/70/2016_Toyota_Innova_2.8_G.jpg',
     features: ['Captain Seats', 'Legendary Comfort', 'Robust'],
     description: 'The gold standard of MUVs in India. Pure highway bliss.'
   },
@@ -144,7 +144,7 @@ export const VEHICLES: Vehicle[] = [
     seats: 7,
     pricePerKm: 25,
     basePrice: 4000,
-    image: 'https://images.unsplash.com/photo-1626013233379-3893c5be1881?auto=format&fit=crop&q=80&w=800',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/2022_Toyota_Kijang_Innova_Zenix_G_HV_(MAGH10%3B_11-25-2022).jpg',
     features: ['Hybrid Tech', 'Ottoman Seats', 'Panoramic Sunroof'],
     description: 'The future of premium family travel. Silent and luxurious.'
   },
@@ -157,7 +157,7 @@ export const VEHICLES: Vehicle[] = [
     seats: 4,
     pricePerKm: 65,
     basePrice: 12000,
-    image: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&q=80&w=800',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/4/43/Mercedes-benz_W213_Sedan_by_Front_(right).jpg',
     features: ['Rear Seat Luxury', 'Soft Close Doors', 'Burmester Sound'],
     description: 'The quintessential luxury sedan for corporate leaders.'
   },
@@ -168,7 +168,7 @@ export const VEHICLES: Vehicle[] = [
     seats: 4,
     pricePerKm: 150,
     basePrice: 25000,
-    image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=800',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/9/92/2022_Mercedes-Benz_S350_L_AMG_Line_Premium_Diesel_Automatic_3.0_Front.jpg',
     features: ['First Class Seating', 'Massage Seats', 'Privacy Blinds'],
     description: 'The best car in the world. Unparalleled luxury for VIPs.'
   },
@@ -181,7 +181,7 @@ export const VEHICLES: Vehicle[] = [
     seats: 12,
     pricePerKm: 28,
     basePrice: 5500,
-    image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=800',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/2/23/MakeInIndia-Force-Motors-Minivan.jpg',
     features: ['Pushback Seats', 'Individual AC', 'Music System'],
     description: 'Ideal for group tours, weddings, and large family outings.'
   }
