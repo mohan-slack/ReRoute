@@ -26,7 +26,7 @@ import PriceCalculator from './components/PriceCalculator';
 import CabListing from './components/CabListing';
 import Checkout from './components/Checkout';
 import BookingConfirmation from './components/BookingConfirmation';
-import { BookingDetails, TripType, User } from './types';
+import { BookingDetails, LocalPackage, TripType, User } from './types';
 
 export type ViewType = 
   | 'home' | 'outstation' | 'oneway' | 'local' | 'airport' | 'corporate' | 'faq' | 'cancellation' | 'fleet' | 'bookings' | 'profile'
@@ -70,7 +70,8 @@ const App: React.FC = () => {
     returnDate: '',
     pickupAddress: '',
     airportTripSubtype: 'DROP',
-    tripType: TripType.OUTSTATION_ROUND
+    tripType: TripType.OUTSTATION_ONEWAY,
+    localPackage: '8hrs_80km'
   });
 
   useEffect(() => {
@@ -109,9 +110,18 @@ const App: React.FC = () => {
         }
         break;
       case TripType.OUTSTATION_ONEWAY:
+        if (!booking.from || !booking.to) {
+          alert("Please provide both Pickup and Drop locations.");
+          return;
+        }
+        break;
       case TripType.OUTSTATION_ROUND:
         if (!booking.from || !booking.to) {
-          alert("Please provide both Pickup and Drop locations for Outstation travel.");
+          alert("Please provide both Pickup and Drop locations.");
+          return;
+        }
+        if (!booking.returnDate) {
+          alert("Please select a Return Date for your round trip.");
           return;
         }
         break;

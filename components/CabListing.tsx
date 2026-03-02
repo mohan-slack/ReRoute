@@ -12,24 +12,36 @@ interface CabListingProps {
 }
 
 const CabListing: React.FC<CabListingProps> = ({ booking, onClose, onSelect }) => {
+  const LOCAL_PACKAGE_MULTIPLIER: Record<string, number> = {
+    '4hrs_40km': 0.65,
+    '8hrs_80km': 1.0,
+    '12hrs_120km': 1.5,
+  };
+
   // Filter context-relevant cabs
   const availableCabs = VEHICLES.filter(v => {
     if (booking.tripType === TripType.LOCAL) {
-      // For local, show budget to mid-range
+      // For local, show hatchbacks, sedans, and SUVs — no tempo traveller
       return ['h2', 's1', 's3', 'm2', 'l1'].includes(v.id);
+    }
+    if (booking.tripType === TripType.AIRPORT) {
+      // For airport, show sedans and SUVs — comfortable point-to-point transfers
+      return ['s1', 's3', 'm2', 'l1', 'l4'].includes(v.id);
     }
     if (booking.tripType === TripType.OUTSTATION_ROUND) {
       // For round trips, show comfortable long-distance SUVs and Sedans
       return ['s3', 'm1', 'm2', 'm3', 't1'].includes(v.id);
     }
-    // For others, show standard mix
+    // One Way — standard mix
     return ['s1', 'm2', 'm3', 'l1', 't1'].includes(v.id);
   });
 
   const getPriceEstimate = (cab: typeof VEHICLES[0]) => {
     switch (booking.tripType) {
-      case TripType.LOCAL:
-        return cab.basePrice;
+      case TripType.LOCAL: {
+        const mult = LOCAL_PACKAGE_MULTIPLIER[booking.localPackage || '8hrs_80km'] ?? 1.0;
+        return Math.round(cab.basePrice * mult);
+      }
       case TripType.AIRPORT:
         return Math.round(cab.basePrice * 0.65);
       case TripType.OUTSTATION_ONEWAY:

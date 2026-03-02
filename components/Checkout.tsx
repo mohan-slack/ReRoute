@@ -2,7 +2,19 @@
 import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { VEHICLES } from '../constants';
-import { BookingDetails, User, TripType } from '../types';
+import { BookingDetails, User, TripType, LocalPackage } from '../types';
+
+const LOCAL_PACKAGE_LABELS: Record<LocalPackage, string> = {
+  '4hrs_40km': '4 hrs / 40 km',
+  '8hrs_80km': '8 hrs / 80 km',
+  '12hrs_120km': '12 hrs / 120 km',
+};
+
+const LOCAL_PACKAGE_MULTIPLIER: Record<LocalPackage, number> = {
+  '4hrs_40km': 0.65,
+  '8hrs_80km': 1.0,
+  '12hrs_120km': 1.5,
+};
 import { ChevronLeft, ShieldCheck, MapPin, Calendar, Clock, CreditCard, Wallet, Landmark, ArrowRight, Info, CheckCircle2, Navigation } from 'lucide-react';
 
 interface CheckoutProps {
@@ -21,14 +33,16 @@ const Checkout: React.FC<CheckoutProps> = ({ booking, cabId, user, onBack, onCon
 
   const baseFare = useMemo(() => {
     switch (booking.tripType) {
-      case TripType.LOCAL:
-        return vehicle.basePrice; // Standard full day rental
+      case TripType.LOCAL: {
+        const mult = LOCAL_PACKAGE_MULTIPLIER[booking.localPackage || '8hrs_80km'] ?? 1.0;
+        return Math.round(vehicle.basePrice * mult);
+      }
       case TripType.AIRPORT:
-        return Math.round(vehicle.basePrice * 0.65); // Specific airport transfer rate
+        return Math.round(vehicle.basePrice * 0.65);
       case TripType.OUTSTATION_ONEWAY:
-        return vehicle.basePrice + 1200; // Base + estimated distance premium
+        return vehicle.basePrice + 1200;
       case TripType.OUTSTATION_ROUND:
-        return (vehicle.basePrice * 2) + 500; // Multi-day round trip estimate
+        return (vehicle.basePrice * 2) + 500;
       default:
         return vehicle.basePrice;
     }
@@ -119,6 +133,17 @@ const Checkout: React.FC<CheckoutProps> = ({ booking, cabId, user, onBack, onCon
                         <p className="text-sm font-bold text-gray-900">{booking.pickupTime || 'Immediate'}</p>
                       </div>
                     </div>
+                    {booking.tripType === TripType.LOCAL && booking.localPackage && (
+                      <div className="flex items-center gap-4">
+                        <div className="w-10 h-10 bg-reroute-light rounded-xl flex items-center justify-center text-reroute-teal">
+                          <Navigation size={18} />
+                        </div>
+                        <div>
+                          <p className="text-[9px] font-black text-gray-400 uppercase tracking-tight">Package</p>
+                          <p className="text-sm font-bold text-gray-900">{LOCAL_PACKAGE_LABELS[booking.localPackage]}</p>
+                        </div>
+                      </div>
+                    )}
                   </div>
                </div>
             </div>

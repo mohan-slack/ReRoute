@@ -1,9 +1,15 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { TripType, BookingDetails } from '../types';
-import { MapPin, Calendar, Clock, ChevronDown, Plane, LocateFixed, Search, Loader2, ArrowRight } from 'lucide-react';
+import { TripType, BookingDetails, LocalPackage } from '../types';
+import { MapPin, Calendar, Clock, ChevronDown, Plane, LocateFixed, Search, Loader2, ArrowRight, Timer } from 'lucide-react';
 import { SOUTH_INDIAN_CITIES, SOUTH_INDIAN_AIRPORTS } from '../constants';
+
+const LOCAL_PACKAGES: { value: string; label: string; sublabel: string }[] = [
+  { value: '4hrs_40km', label: '4 hrs / 40 km', sublabel: 'Short errands' },
+  { value: '8hrs_80km', label: '8 hrs / 80 km', sublabel: 'Full day city' },
+  { value: '12hrs_120km', label: '12 hrs / 120 km', sublabel: 'Extended tour' },
+];
 
 interface BookingWidgetProps {
   bookingDetails: BookingDetails;
@@ -400,15 +406,16 @@ const BookingWidget: React.FC<BookingWidgetProps> = ({ bookingDetails, onUpdate,
                 <InputWrapper {...commonProps} label="Time" helper="Pickup Time" className="lg:border-r-0">
                   <Clock className="text-gray-400 mr-3 shrink-0" size={20} />
                   <div className="relative flex-grow min-w-0">
-                    <select 
+                    <select
                       className="bg-transparent border-none outline-none w-full font-black text-lg text-gray-900 appearance-none cursor-pointer pr-8 truncate"
                       value={bookingDetails.pickupTime || ''}
                       onChange={(e) => onUpdate({ pickupTime: e.target.value })}
                     >
                       <option value="">Select Time</option>
-                      {Array.from({ length: 24 }).map((_, i) => (
-                        <option key={i} value={`${i}:00`}>{`${i}:00`}</option>
-                      ))}
+                      {Array.from({ length: 24 }).map((_, i) => {
+                        const h = String(i).padStart(2, '0');
+                        return <option key={i} value={`${h}:00`}>{`${h}:00`}</option>;
+                      })}
                     </select>
                     <ChevronDown className="absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" size={18} />
                   </div>
@@ -463,15 +470,16 @@ const BookingWidget: React.FC<BookingWidgetProps> = ({ bookingDetails, onUpdate,
                 <InputWrapper {...commonProps} label="Time" className="xl:border-r-0">
                   <Clock className="text-gray-400 mr-3 shrink-0" size={20} />
                   <div className="relative flex-grow min-w-0">
-                    <select 
+                    <select
                       className="bg-transparent border-none outline-none w-full font-black text-lg text-gray-900 appearance-none cursor-pointer pr-8 truncate"
                       value={bookingDetails.pickupTime || ''}
                       onChange={(e) => onUpdate({ pickupTime: e.target.value })}
                     >
                       <option value="">Select Time</option>
-                      {Array.from({ length: 24 }).map((_, i) => (
-                        <option key={i} value={`${i}:00`}>{`${i}:00`}</option>
-                      ))}
+                      {Array.from({ length: 24 }).map((_, i) => {
+                        const h = String(i).padStart(2, '0');
+                        return <option key={i} value={`${h}:00`}>{`${h}:00`}</option>;
+                      })}
                     </select>
                     <ChevronDown className="absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" size={18} />
                   </div>
@@ -480,11 +488,11 @@ const BookingWidget: React.FC<BookingWidgetProps> = ({ bookingDetails, onUpdate,
             )}
 
             {bookingDetails.tripType === TripType.LOCAL && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full overflow-visible">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 w-full overflow-visible">
                 <InputWrapper {...commonProps} label="City" fieldId="from" helper="Select City" isLiveLocationEnabled>
                   <MapPin className="text-gray-400 mr-3 shrink-0" size={20} />
-                  <input 
-                    className="bg-transparent border-none outline-none w-full font-black text-lg text-gray-900 placeholder:text-gray-300 min-w-0" 
+                  <input
+                    className="bg-transparent border-none outline-none w-full font-black text-lg text-gray-900 placeholder:text-gray-300 min-w-0"
                     placeholder="Enter City"
                     value={bookingDetails.from || ''}
                     onFocus={() => handleFocus('from')}
@@ -493,9 +501,24 @@ const BookingWidget: React.FC<BookingWidgetProps> = ({ bookingDetails, onUpdate,
                     autoComplete="off"
                   />
                 </InputWrapper>
+                <InputWrapper {...commonProps} label="Package" helper="Duration & Distance">
+                  <Timer className="text-gray-400 mr-3 shrink-0" size={20} />
+                  <div className="relative flex-grow min-w-0">
+                    <select
+                      className="bg-transparent border-none outline-none w-full font-black text-lg text-gray-900 appearance-none cursor-pointer pr-8 truncate"
+                      value={bookingDetails.localPackage || '8hrs_80km'}
+                      onChange={(e) => onUpdate({ localPackage: e.target.value as LocalPackage })}
+                    >
+                      {LOCAL_PACKAGES.map(pkg => (
+                        <option key={pkg.value} value={pkg.value}>{pkg.label}</option>
+                      ))}
+                    </select>
+                    <ChevronDown className="absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" size={18} />
+                  </div>
+                </InputWrapper>
                 <InputWrapper {...commonProps} label="Date">
                   <Calendar className="text-gray-400 mr-3 shrink-0" size={20} />
-                  <input 
+                  <input
                     type="date"
                     className="bg-transparent border-none outline-none w-full font-black text-lg text-gray-900 min-w-0 cursor-pointer"
                     value={bookingDetails.pickupDate || ''}
@@ -505,15 +528,16 @@ const BookingWidget: React.FC<BookingWidgetProps> = ({ bookingDetails, onUpdate,
                 <InputWrapper {...commonProps} label="Time" className="lg:border-r-0">
                   <Clock className="text-gray-400 mr-3 shrink-0" size={20} />
                   <div className="relative flex-grow min-w-0">
-                    <select 
+                    <select
                       className="bg-transparent border-none outline-none w-full font-black text-lg text-gray-900 appearance-none cursor-pointer pr-8 truncate"
                       value={bookingDetails.pickupTime || ''}
                       onChange={(e) => onUpdate({ pickupTime: e.target.value })}
                     >
                       <option value="">Select Time</option>
-                      {Array.from({ length: 24 }).map((_, i) => (
-                        <option key={i} value={`${i}:00`}>{`${i}:00`}</option>
-                      ))}
+                      {Array.from({ length: 24 }).map((_, i) => {
+                        const h = String(i).padStart(2, '0');
+                        return <option key={i} value={`${h}:00`}>{`${h}:00`}</option>;
+                      })}
                     </select>
                     <ChevronDown className="absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" size={18} />
                   </div>
@@ -584,15 +608,16 @@ const BookingWidget: React.FC<BookingWidgetProps> = ({ bookingDetails, onUpdate,
                 <InputWrapper {...commonProps} label="Time" className="xl:border-r-0">
                   <Clock className="text-gray-400 mr-3 shrink-0" size={20} />
                   <div className="relative flex-grow min-w-0">
-                    <select 
+                    <select
                       className="bg-transparent border-none outline-none w-full font-black text-lg text-gray-900 appearance-none cursor-pointer pr-8 truncate"
                       value={bookingDetails.pickupTime || ''}
                       onChange={(e) => onUpdate({ pickupTime: e.target.value })}
                     >
                       <option value="">Select Time</option>
-                      {Array.from({ length: 24 }).map((_, i) => (
-                        <option key={i} value={`${i}:00`}>{`${i}:00`}</option>
-                      ))}
+                      {Array.from({ length: 24 }).map((_, i) => {
+                        const h = String(i).padStart(2, '0');
+                        return <option key={i} value={`${h}:00`}>{`${h}:00`}</option>;
+                      })}
                     </select>
                     <ChevronDown className="absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" size={18} />
                   </div>
